@@ -9,7 +9,12 @@ namespace Server.MvcFramework
 
         public HttpResponse View([CallerMemberName] string viewPath = null)
         {
-            var responseHtml = System.IO.File.ReadAllText("Views/" + this.GetType().Name.Replace("Controller", string.Empty) + "/" + viewPath + ".html");
+            var layout = System.IO.File.ReadAllText("Views/Shared/_Layout.html");
+
+            var viewContent = System.IO.File.ReadAllText("Views/" + this.GetType().Name.Replace("Controller", string.Empty) + "/" + viewPath + ".html");
+
+            var responseHtml = layout.Replace("@RenderBody()", viewContent);
+
             var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
             var response = new HttpResponse("text/html", responseBodyBytes);
 

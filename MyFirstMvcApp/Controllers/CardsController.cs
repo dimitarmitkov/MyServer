@@ -9,21 +9,18 @@ namespace MyFirstMvcApp.Controllers
         {
 
             return this.View();
-            //return this.View("../../../Views/Cards/Add.html");
         }
 
         public HttpResponse All(HttpRequest request)
         {
 
             return this.View();
-            //return this.View("../../../Views/Cards/All.html");
         }
 
         public HttpResponse Collection(HttpRequest request)
         {
 
             return this.View();
-            //return this.View("../../../Views/Cards/Collection.html");
         }
 
     }
