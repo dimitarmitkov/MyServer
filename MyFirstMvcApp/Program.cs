@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyFirstMvcApp.Controllers;
 using Server.HTTP;
 
 namespace MyFirstMvcApp
@@ -13,7 +14,7 @@ namespace MyFirstMvcApp
         {
             IHttpServer server = new HttpServer();
 
-            server.AddRoute("/", HomePage);
+            server.AddRoute("/", new HomeController().Index);
 
             server.AddRoute("/favicon.ico", Favicon);
 
@@ -21,37 +22,17 @@ namespace MyFirstMvcApp
 
             server.AddRoute("/users/login", Login);
 
+            server.AddRoute("/users/register", Register);
+
             await server.StartAsync(63342);
 
         }
 
-        static HttpResponse HomePage(HttpRequest request)
-        {
-            var responseHtml = "<h1>Welcome!</h1>" +
-            request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
 
-            return response;
-        }
 
-        static HttpResponse About(HttpRequest request)
-        {
-            var responseHtml = "<h2>About</h2>";
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
 
-            return response;
-        }
 
-        static HttpResponse Login(HttpRequest request)
-        {
-            var responseHtml = "<h3>Login</h3>";
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
 
-            return response;
-        }
 
         static HttpResponse Favicon(HttpRequest request)
         {
