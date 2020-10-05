@@ -1,16 +1,14 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Server.HTTP;
+using Server.MvcFramework;
 
 namespace MyFirstMvcApp.Controllers
 {
-    public class StaticFilesController
+    public class StaticFilesController : Controller
     {
-        HttpResponse Favicon(HttpRequest request)
+        public HttpResponse Favicon(HttpRequest request)
         {
-            var fileBytes = File.ReadAllBytes("../../../wwwroot/favicon.ico");
-            var response = new HttpResponse("image/vnd.microsoft.icon", fileBytes, HttpStatusCode.OK);
-            return response;
+            return this.File("../../../wwwroot/favicon.ico", "image/vnd.microsoft.ico");
         }
     }
 }
