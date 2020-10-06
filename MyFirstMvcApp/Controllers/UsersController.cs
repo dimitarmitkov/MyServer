@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using Server.HTTP;
 using Server.MvcFramework;
@@ -17,5 +18,11 @@ namespace MyFirstMvcApp.Controllers
             return this.View();
 
         }
+
+        internal HttpResponse DoLogin(HttpRequest arg)
+        {
+            return this.Redirect("/");
+        }
+
     }
 }
